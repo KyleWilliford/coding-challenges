@@ -7,16 +7,21 @@ import java.util.TreeMap;
 
 /**
  * https://edabit.com/challenge/RkicZ4kkcSx8K3d4e
- *
- * ulam(4) ➞ 4
- * ulam(9) ➞ 16
- * ulam(206) ➞ 1856
  */
 public class Ulam {
     public static void main(String[] args) {
         System.out.println(ulam(9));
     }
 
+    /**
+     * Accepts a number and returns the nth Ulam sequence number.
+     * ulam(4) ➞ 4
+     * ulam(9) ➞ 16
+     * ulam(206) ➞ 1856
+     *
+     * @param n an integer
+     * @return an integer
+     */
     private static Integer ulam(int n) {
         List<Integer> seq = new ArrayList<>();
         seq.add(1);
