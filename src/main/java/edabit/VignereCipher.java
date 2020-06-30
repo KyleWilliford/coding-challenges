@@ -8,31 +8,35 @@ import java.util.Map;
  */
 public class VignereCipher {
 
-    public static void main(String[] args) {
-        System.out.println("Soylent green is people. -> " + vignereEncipher("Soylent green is people.", "spoiler"));
-        System.out.println("Darth Vader is Luke's father. ->" + vignereEncipher("Darth Vader is Luke's father.", "spoiler"));
-        System.out.println("HMRSSAIEKLSAXQILCCAC -> " + vignereDecipher("HMRSSAIEKLSAXQILCCAC", "python"));
-        System.out.println("SOYLENTGREENISPEOPLE -> " + vignereEncipher("SOYLENTGREENISPEOPLE", "python"));
+    private static final int CIPHER_LENGTH = 26;
+    private static final String SPOILER = "spoiler";
+    private static final String PYTHON = "python";
+    private static final Map<Character, Integer> vignere = new LinkedHashMap<>(CIPHER_LENGTH);
+    private static final Map<Integer, Character> vignereInverse = new LinkedHashMap<>(CIPHER_LENGTH);
+
+    static {
+        buildCiphers();
     }
 
-    private static String vignereDecipher(String message, String key) {
+    public static void main(String[] args) {
+        System.out.println("Soylent green is people. -> " + vignereEncipher("Soylent green is people.", SPOILER));
+        System.out.println("Darth Vader is Luke's father. -> " + vignereEncipher("Darth Vader is Luke's father.", SPOILER));
+        System.out.println("VPFBSZRVTFQDPLCTGNLXYWG -> " + vignereDecipher("VPFBSZRVTFQDPLCTGNLXYWG", SPOILER));
+        System.out.println("HMRSSAIEKLSAXQILCCAC -> " + vignereDecipher("HMRSSAIEKLSAXQILCCAC", PYTHON));
+        System.out.println("SOYLENTGREENISPEOPLE -> " + vignereEncipher("SOYLENTGREENISPEOPLE", PYTHON));
+    }
+
+    private static String vignereDecipher(final String message, String key) {
 //        System.out.println(message);
 //        System.out.println(key);
         key = getKey(message, key);
 //        System.out.println(key);
-        Map<Character, Integer> vignere = new LinkedHashMap<>();
-        Map<Integer, Character> vignereInverse = new LinkedHashMap<>();
-        int i = 0;
-        for (char c = 'A'; c <= 'Z'; c++) {
-            vignere.put(c, i);
-            vignereInverse.put(i++, c);
-        }
         StringBuilder sb = new StringBuilder();
-        for (int j = 0; j < message.length(); j++) {
-            Integer m = vignere.get(message.charAt(j));
-            Integer k = vignere.get(key.charAt(j));
-            Character encipher = vignereInverse.get(((m - k) + vignere.size()) % vignere.size());
-            sb.append(encipher);
+        for (int i = 0; i < message.length(); i++) {
+            Integer m = vignere.get(message.charAt(i));
+            Integer k = vignere.get(key.charAt(i));
+            Character decipheredChar = vignereInverse.get(((m - k) + CIPHER_LENGTH) % CIPHER_LENGTH);
+            sb.append(decipheredChar);
         }
         return sb.toString();
     }
@@ -44,24 +48,25 @@ public class VignereCipher {
 //        System.out.println(message);
         key = getKey(message, key);
 //        System.out.println(key);
-        Map<Character, Integer> vignere = new LinkedHashMap<>();
-        Map<Integer, Character> vignereInverse = new LinkedHashMap<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < message.length(); i++) {
+            Integer m = vignere.get(message.charAt(i));
+            Integer k = vignere.get(key.charAt(i));
+            Character encipheredChar = vignereInverse.get((m + k) % CIPHER_LENGTH);
+            sb.append(encipheredChar);
+        }
+        return sb.toString();
+    }
+
+    private static void buildCiphers() {
         int i = 0;
         for (char c = 'A'; c <= 'Z'; c++) {
             vignere.put(c, i);
             vignereInverse.put(i++, c);
         }
-        StringBuilder sb = new StringBuilder();
-        for (int j = 0; j < message.length(); j++) {
-            Integer m = vignere.get(message.charAt(j));
-            Integer k = vignere.get(key.charAt(j));
-            Character encipher = vignereInverse.get((m + k) % vignere.size());
-            sb.append(encipher);
-        }
-        return sb.toString();
     }
 
-    private static String getKey(String message, String key) {
+    private static String getKey(final String message, String key) {
         StringBuilder sb = new StringBuilder();
         int j = 0;
         for (int i = 0; i < message.length(); i++) {
