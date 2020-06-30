@@ -10,7 +10,9 @@ import java.util.TreeMap;
  */
 public class Ulam {
     public static void main(String[] args) {
-        System.out.println(ulam(9));
+        System.out.println("ulam(4) -> " + ulam(4));
+        System.out.println("ulam(9) -> " + ulam(9));
+        System.out.println("ulam(206) -> " + ulam(206));
     }
 
     /**
@@ -27,18 +29,18 @@ public class Ulam {
         seq.add(1);
         seq.add(2);
         for (int k = seq.size(); k < n; k++) {
-            System.out.println("Seq " + seq);
+//            System.out.println("Seq " + seq);
             Map<Integer, Integer> results = new TreeMap<>();
             for (int i = 0; i < seq.size(); i++) {
                 for (int j = i + 1; j < seq.size(); j++) {
                     Integer result = seq.get(i) + seq.get(j);
                     if (result > seq.get(seq.size() - 1)) {
                         Integer frequency = results.getOrDefault(result, 0);
-                        results.put(result, frequency + 1);
+                        results.put(result, ++frequency);
                     }
                 }
             }
-            System.out.println("results " + results);
+//            System.out.println("results " + results);
             for (Map.Entry<Integer, Integer> entry : results.entrySet()) {
                 if (entry.getValue() == 1) {
                     seq.add(entry.getKey());

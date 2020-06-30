@@ -1,6 +1,8 @@
 package edabit;
 
-import org.apache.commons.lang3.tuple.Pair;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * https://edabit.com/challenge/EtW6o2eH88C89NYzw
@@ -15,51 +17,28 @@ public class NextLargestNumber {
     }
 
     private static Integer nextNumber(Integer n) {
-        String s = Integer.toString(n);
-        Pair<String, Integer> pair = swapFirstLargestDigit(s);
-        s = pair.getLeft();
-        Integer m = pair.getRight();
-        if (n.toString().equals(s)) {
-            return Integer.parseInt(s);
-        }
-        s = sort(s, m);
-        return Integer.parseInt(s);
+        List<Integer> digits = Arrays.stream(Integer.toString(n).split("")).map(Integer::parseInt).collect(Collectors.toList());
+        int skip = swapFirstLargestDigit(digits);
+//        System.out.println(digits);
+//        System.out.println(skip);
+        List<Integer> finalDigits = digits.stream().limit(skip).collect(Collectors.toList());
+        finalDigits.addAll(digits.stream().skip(skip).sorted().collect(Collectors.toList()));
+//        System.out.println(finalDigits);
+        return Integer.parseInt(finalDigits.stream().map(d -> Integer.toString(d)).collect(Collectors.joining("")));
     }
 
-    private static String sort(String s, Integer m) {
-        for (int i = s.length() - 1; i > m; i--) {
-            for (int j = i - 1; j > m; j--) {
-                if (s.substring(i, i + 1).compareTo(s.substring(j, j + 1)) < 0) {
-                    s = swap(s, i, j);
-                }
-            }
-        }
-        return s;
-    }
-
-    private static Pair<String, Integer> swapFirstLargestDigit(String s) {
-        for (int i = s.length() - 1; i >= 0; i--) {
+    private static int swapFirstLargestDigit(List<Integer> digits) {
+        for (int i = digits.size() - 1; i >= 0; i--) {
             for (int j = i - 1; j >= 0; j--) {
-                if (s.substring(i, i + 1).compareTo(s.substring(j, j + 1)) > 0) {
-                    s = swap(s, i, j);
-                    return Pair.of(s, j);
+                Integer digitI = digits.get(i);
+                Integer digitJ = digits.get(j);
+                if (digitI > digitJ) {
+                    digits.set(i, digitJ);
+                    digits.set(j, digitI);
+                    return j + 1;
                 }
             }
         }
-        return Pair.of(s, 0);
-    }
-
-    private static String swap(String s, int i, int j) {
-        StringBuilder sb = new StringBuilder();
-        for (int k = 0; k < s.length(); k++) {
-            if (k == i) {
-                sb.append(s, j, j + 1);
-            } else if (k == j) {
-                sb.append(s, i, i + 1);
-            } else {
-                sb.append(s, k, k + 1);
-            }
-        }
-        return sb.toString();
+        return digits.size();
     }
 }
