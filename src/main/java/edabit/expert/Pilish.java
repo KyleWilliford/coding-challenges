@@ -4,13 +4,22 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * https://edabit.com/challenge/Fy2ySuj6XK5mxrsgR
  */
 public class Pilish {
 
-    private static final List<Integer> PI = Arrays.asList(3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9);
+    private static final int PI_PLACES = 15;
+    private static final List<Integer> PI;
+
+    static {
+        PI = Arrays.stream(Double.toString(Math.PI).replaceAll("\\.", "").split(""))
+                .limit(PI_PLACES)
+                .map(Integer::parseInt).collect(Collectors.toList());
+//        System.out.println(PI);
+    }
 
     public static void main(String[] args) {
         System.out.println("HOWINEEDADRINKALCOHOLICINNATUREAFTERTHEHEAVYLECTURESINVOLVINGQUANTUMMECHANICSANDALLTHESECRETSOFTHEUNIVERSE -> "
