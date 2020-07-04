@@ -1,4 +1,4 @@
-package edabit;
+package edabit.expert;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

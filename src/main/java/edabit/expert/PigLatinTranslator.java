@@ -1,4 +1,4 @@
-package edabit;
+package edabit.expert;
 
 import org.apache.commons.lang3.StringUtils;
 
