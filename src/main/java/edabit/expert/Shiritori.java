@@ -7,6 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * https://edabit.com/challenge/rqum6rzyZQrC43Ldv
+ */
 @Getter
 @NoArgsConstructor
 public class Shiritori {
