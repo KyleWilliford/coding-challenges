@@ -12,30 +12,31 @@ public class Sherlock {
         System.out.println("aabbcd -> " + sherlock("aabbcd"));
         System.out.println("aabbccddeefghi -> " + sherlock("aabbccddeefghi"));
         System.out.println("abcdefghhgfedecba -> " + sherlock("abcdefghhgfedecba"));
+        System.out.println("abcdefghhgfedecbae -> " + sherlock("abcdefghhgfedecbae"));
     }
 
     private static String sherlock(String s) {
-//        System.out.println(s);
+        System.out.println(s);
         Map<String, Integer> charToFreq = new LinkedHashMap<>(s.length());
         String[] letters = s.split("");
         for (String l : letters) {
             Integer freq = charToFreq.getOrDefault(l, 0);
             charToFreq.put(l, ++freq);
         }
-//        System.out.println(charToFreq);
+        System.out.println(charToFreq);
         Map<Integer, Integer> freqToCount = new LinkedHashMap<>(charToFreq.size());
         for (Map.Entry<String, Integer> entry : charToFreq.entrySet()) {
             Integer v = freqToCount.getOrDefault(entry.getValue(), 0);
             freqToCount.put(entry.getValue(), ++v);
         }
-//        System.out.println(freqToCount);
+        System.out.println(freqToCount);
         if (freqToCount.size() == 0 || freqToCount.size() == 1) {
             return "YES";
         } else if (freqToCount.size() > 2) {
             return "NO";
         }
         for (Map.Entry<Integer, Integer> entry : freqToCount.entrySet()) {
-            if (entry.getValue() == 1) {
+            if (entry.getValue() == 1 && freqToCount.containsKey(entry.getKey() - 1)) {
                 return "YES";
             }
         }
