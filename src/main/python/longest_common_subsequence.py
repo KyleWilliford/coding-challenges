@@ -1,6 +1,6 @@
 # Created by jzhu at 9/18/20
 '''
-https://en.wikipedia.org/wiki/Longest_common_subsequence_problem#:~:text=The%20longest%20common%20subsequence%20(LCS,(often%20just%20two%20sequences).
+https://en.wikipedia.org/wiki/Longest_common_subsequence_problem
 
 For example, consider the sequences (ABCD) and (ACBAD).
 They have 5 length-2 common subsequences: (AB), (AC), (AD), (BD), and (CD);
@@ -20,30 +20,25 @@ class Solution(object):
                     max_Subseq[i, j] = max_Subseq[i-1, j-1] + 1
                 else:
                     max_Subseq[i, j] = max(max_Subseq[i - 1, j], max_Subseq[i, j - 1])
-        print(f'Longest Common Subsequence length is {max_Subseq[-1, -1]}')
+        # print(f'Longest Common Subsequence length is {max_Subseq[-1, -1]}')
 
         lcs = []
-        while i > 0:
-            while j > 0:
-                if max_Subseq[i, j] == max_Subseq[i-1, j-1] + 1:
-                    print(f'(i, j) = ({i, j}), string = {string1[i-1]}')
-                    lcs = [string1[i-1]] + lcs
-                    i = i-1
-                    j = j-1
-                elif max_Subseq[i, j] == max_Subseq[i, j-1]:
-                    j = j-1
-                else:
-                    i = i-1
-                if i <= 0 or j <= 0:
-                    break
-            if i <= 0 or j <= 0:
-                break
-        print(f'Longest Common Subsequence is {lcs}')
+        while i > 0 and j > 0 and len(lcs) < max_Subseq[-1, -1]:
+            if max_Subseq[i, j] == max_Subseq[i, j-1]:
+                j = j-1
+            elif max_Subseq[i, j] == max_Subseq[i-1, j]:
+                i = i-1
+            elif max_Subseq[i, j] == max_Subseq[i-1, j-1] + 1:
+                print(f'(i, j) = ({i, j}), string = {string1[i-1], string2[j-1]}')
+                lcs = [string1[i-1]] + lcs
+                i = i-1
+                j = j-1
+        # print(f'Longest Common Subsequence is {lcs}')
 
-        return np.max(max_Subseq)
+        return max_Subseq[-1, -1], lcs
 
 if __name__ == '__main__':
-    string1 = 'GAC'
-    string2 = 'AGCAT'
+    string1 = 'ABCD'
+    string2 = 'ACBAD'
     sol = Solution()
-    sol.longestCommonSubsequence(string1, string2)
+    lcs_len, lcs = sol.longestCommonSubsequence(string1, string2)
