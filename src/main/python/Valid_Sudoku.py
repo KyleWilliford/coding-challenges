@@ -12,3 +12,24 @@ A Sudoku board (partially filled) could be valid but is not necessarily solvable
 Only the filled cells need to be validated according to the mentioned rules.
 
 """
+class Solution:
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        # init data
+        rows = [{} for i in range(9)]
+        columns = [{} for i in range(9)]
+        boxs = [{} for i in range(9)]
+
+        # validate
+        for i in range(9):
+            for j in range(9):
+                num = [i][j]
+                if num != '.':
+                    num = int(num)
+                    box = (i // 3) * 3 + j // 3
+
+                    # keep the current cell value
+                    rows[i][num] = rows[i].get(num, 0) + 1
