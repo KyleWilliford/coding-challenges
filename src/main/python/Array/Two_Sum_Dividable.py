@@ -21,10 +21,11 @@ def sum_divisible_1(a, K) -> int:
     n = len(a)
     cnt = 0
     for i in range(n - 1):
-        for j in range(i+1, n):
+        for j in range(i + 1, n):
             if (a[i] + a[j]) % K == 0:
                 cnt += 1
     return cnt
+
 
 def sum_divisible_2(a, K) -> int:
     """ hash map
@@ -44,12 +45,12 @@ def sum_divisible_2(a, K) -> int:
     return sum_cnt
 
 
-a = [1, 4, 5, 3]
-K = 3
-assert sum_divisible_1(a, K) == 2
-assert sum_divisible_2(a, K) == 2
+a_test = [1, 4, 5, 3]
+K_test = 3
+assert sum_divisible_1(a_test, K_test) == 2
+assert sum_divisible_2(a_test, K_test) == 2
 
-a = [1, 4, 5, 3, 3]
-K = 3
-assert sum_divisible_1(a, K) == 3
-assert sum_divisible_2(a, K) == 3
+a_test = [1, 4, 5, 3, 3]
+K_test = 3
+assert sum_divisible_1(a_test, K_test) == 3
+assert sum_divisible_2(a_test, K_test) == 3
