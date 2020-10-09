@@ -11,36 +11,36 @@
 from collections import defaultdict
 
 
-def sum_divisible_1(a, K) -> int:
+def sum_divisible_1(a, k) -> int:
     """ brute force
 
     :param a: List[int]
-    :param K: int
+    :param k: int
     :return: int, number of pairs of elements whose sum is divisible by K
     """
     n = len(a)
     cnt = 0
     for i in range(n - 1):
         for j in range(i + 1, n):
-            if (a[i] + a[j]) % K == 0:
+            if (a[i] + a[j]) % k == 0:
                 cnt += 1
     return cnt
 
 
-def sum_divisible_2(a, K) -> int:
+def sum_divisible_2(a, k) -> int:
     """ hash map
 
     :param a: List[int]
-    :param K: int
+    :param k: int
     :return: int, number of pairs of elements whose sum is divisible by K
     """
     hash_cnt = defaultdict(int)
     for n in a:
-        hash_cnt[n % K] += 1
+        hash_cnt[n % k] += 1
 
     sum_cnt = int(hash_cnt[0] * (hash_cnt[0] - 1) / 2)
-    for n in range(1, int(K / 2) + 1):
-        sum_cnt += hash_cnt[n] * hash_cnt[K - n]
+    for n in range(1, int(k / 2) + 1):
+        sum_cnt += hash_cnt[n] * hash_cnt[k - n]
 
     return sum_cnt
 
