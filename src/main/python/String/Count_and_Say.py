@@ -22,15 +22,16 @@ import itertools
 
 
 class Solution:
-    def countAndSay(self, n: int) -> str:
+    def countAndSayRecursive(self, n: int) -> str:
         """
+        recursive
 
         Runtime: 36 ms. Your runtime beats 60.75 % of python3 submissions.
         Memory Usage: 14.3 MB
         :param n:
         :return:
         """
-        def transferToSay(count):
+        def transferToSay(count: str):
             say = []
             cnt = 1
             key = count[0]
