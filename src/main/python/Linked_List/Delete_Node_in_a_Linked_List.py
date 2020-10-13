@@ -28,7 +28,5 @@ class Solution:
         :type node: ListNode
         :rtype: void Do not return anything, modify node in-place instead.
         """
-
-
-head = [4,5,1,9], node = 5
-[4,1,9]
+        node.val = node.next.val
+        node.next = node.next.next
