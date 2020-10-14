@@ -12,10 +12,10 @@ A linked list can be reversed either iteratively or recursively. Could you imple
 
 
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 class Solution:
     def reverseList_interative(self, head: ListNode) -> ListNode:
         """
@@ -34,4 +34,4 @@ class Solution:
 
         return priorNode
 
-    def reverseList_resursive(self, head: ListNode) -> ListNode:
+    def reverseList_recursive(self, head: ListNode) -> ListNode:
