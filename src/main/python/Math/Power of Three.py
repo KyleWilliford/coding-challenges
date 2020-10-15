@@ -8,7 +8,7 @@ Follow up:
 Could you do it without using any loop / recursion?
 """
 from numpy import base_repr
-
+import re
 
 def isPowerOfThree_recursive(n: int) -> bool:
     """
@@ -51,16 +51,36 @@ assert not isPowerOfThree_interactive(8)
 def isPowerOfThree(n: int) -> bool:
     """
     Base conversion
+
+    Runtime: 208 ms, faster than 5.30% of Python3 online submissions for Power of Three.
+    Memory Usage: 30.2 MB, less than 100.00% of Python3 online submissions for Power of Three.
     :param n:
     :return:
     """
+    if n < 3:
+        return n == 1
     nBase3 = base_repr(n, 3)
-    for i in nBase3[1:]:
-        if i != 0:
-            return False
-    return True
+    return bool(re.match(r'^10*$', nBase3))
 
 
 assert isPowerOfThree(1)
 assert isPowerOfThree(27)
-assert not isPowerOfThree(8)
+assert not isPowerOfThree(6)
+
+
+def isPowerOfThree(n: int) -> bool:
+    """
+    Integer Limitations
+
+    Runtime: 112 ms, faster than 22.58% of Python3 online submissions for Power of Three.
+    Memory Usage: 30.3 MB, less than 100.00% of Python3 online submissions for Power of Three.
+    :param n:
+    :return:
+    """
+    return n > 0 and pow(3, 19) % n == 0
+
+
+assert isPowerOfThree(1)
+assert isPowerOfThree(27)
+assert not isPowerOfThree(6)
+
