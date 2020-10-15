@@ -13,3 +13,91 @@ Return true if there is a cycle in the linked list. Otherwise, return false.
 Follow up:
 Can you solve it using O(1) (i.e. constant) memory?
 """
+
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+class Solution:
+    def hasCycle_hast(self, head: ListNode) -> bool:
+        """
+        Use hash table
+
+        Runtime: 40 ms. Your runtime beats 97.79 % of python3 submissions.
+        Memory Usage: 17.3 MB
+        :param head:
+        :return:
+        """
+        # print(head)
+        nodeSet = set()
+        node = head
+        while node:
+            if node not in nodeSet:
+                nodeSet.add(node)
+            else:
+                return True
+            node = node.next
+        return False
+
+    def hasCycle_2pointer(self, head: ListNode) -> bool:
+        """
+        Use two pointer
+
+        Runtime: 44 ms. Your runtime beats 91.15 % of python3 submissions.
+        Memory Usage: 17 MB
+        :param head:
+        :return:
+        """
+        if not head:
+            return False
+        node1 = head
+        node2 = head
+        # print(node1.val, node2.val)
+        if not node2.next:
+            return False
+        while node2.next.next:
+            # print(node1.val, node2.val)
+            node1 = node1.next
+            node2 = node2.next.next
+            if node1 == node2:
+                return True
+            elif not node2.next:
+                return False
+        return False
+
+
+# Tests
+def initialLinkedList(val_list, pos):
+    head = ListNode(val_list[0])
+    nodeprior = head
+    for val in val_list[1:]:
+        node = ListNode(val)
+        nodeprior.next = node
+        nodeprior = node
+
+    if pos == -1:
+        return head
+
+    tail = node
+    node = head
+    for _ in range(pos-1):
+        node = node.next
+    tail.next = node
+    return head
+
+sol = Solution()
+valList1 = [3,2,0,-4]
+pos = 1
+linkedList1 = initialLinkedList(valList1, pos)
+assert sol.hasCycle_hast(linkedList1)
+assert sol.hasCycle_2pointer(linkedList1)
+
+valList1 = [3,2,0,-4]
+pos = -1
+linkedList1 = initialLinkedList(valList1, pos)
+assert not sol.hasCycle_hast(linkedList1)
+assert not sol.hasCycle_2pointer(linkedList1)
