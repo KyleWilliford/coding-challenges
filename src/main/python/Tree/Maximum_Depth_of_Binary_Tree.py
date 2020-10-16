@@ -4,7 +4,7 @@ https://leetcode.com/explore/interview/card/top-interview-questions-easy/94/tree
 Given a binary tree, find its maximum depth.
 The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 """
-from src.main.python.utility.tree import TreeNode, initialTree
+from src.main.python.utility.tree import TreeNode, initial_tree
 
 
 class Solution:
@@ -34,7 +34,7 @@ class Solution:
 
 # Tests
 valList = [3, 9, 20, None, None, 15, 7]
-root = initialTree(valList)
+root = initial_tree(valList)
 
 sol = Solution()
 assert sol.maxDepth_recursive(root) == 3

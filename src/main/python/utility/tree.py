@@ -7,8 +7,9 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
 # Create a binary tree based a list of values
-def initialTree(val_list):
+def initial_tree(val_list):
     """
     Create a binary tree based a list of values
     :param val_list: List[int]
@@ -24,7 +25,7 @@ def initialTree(val_list):
             if val_left:
                 node.left = TreeNode(val_left)
                 nextNodes.append(node.left)
-            val_right = val_list[i+1]
+            val_right = val_list[i + 1]
             if val_right:
                 node.right = TreeNode(val_right)
                 nextNodes.append(node.right)
