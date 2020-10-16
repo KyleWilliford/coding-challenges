@@ -41,12 +41,18 @@ def initialTree(val_list):
     root = TreeNode(val_list.pop(0))
     currentNodes = [root]
     nextNodes = list()
-    while val_list:
+    i = 0
+    while i < len(val_list):
         for node in currentNodes:
-            node.left = TreeNode(val_list.pop(0))
-            nextNodes.append(node.left)
-            node.right = TreeNode(val_list.pop(0))
-            nextNodes.append(node.left)
+            val_left = val_list[i]
+            if val_left:
+                node.left = TreeNode(val_left)
+                nextNodes.append(node.left)
+            val_right = val_list[i+1]
+            if val_right:
+                node.right = TreeNode(val_right)
+                nextNodes.append(node.right)
+            i += 2
         currentNodes = nextNodes
         nextNodes = list()
     return root
