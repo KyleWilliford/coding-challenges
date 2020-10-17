@@ -20,34 +20,37 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        """
+        Runtime: 36 ms. Your runtime beats 77.61 % of python3 submissions.
+        Memory Usage: 14.2 MB
+        :param l1:
+        :param l2:
+        :return:
+        """
         if not l1:
             return l2
         if not l2:
             return l1
-        if l1.val <= l2.val:
-            lSmall = l1
-            lLarge = l2
-        else:
-            lSmall = l2
-            lLarge = l1
-        # print(f'lSmall, lLarge = {lSmall, lLarge}')
-        head = lSmall
-        node = lLarge
+        if l1.val > l2.val:
+            l1, l2 = l2, l1
+        # print(f'l1, l2 = {l1, l2}')
+        head = l1
+        node = l2
         # print(f'head, node = {head, node}')
         while node:
-            if not lSmall.next:
-                # print(f'lSmall, node = {lSmall, node}')
-                lSmall.next = node
+            if not l1.next:
+                # print(f'l1, node = {l1, node}')
+                l1.next = node
                 break
-                # print(f'lSmall = {lSmall}')
-            elif lSmall.val <= node.val <= lSmall.next.val:
+                # print(f'l1 = {l1}')
+            elif l1.val <= node.val <= l1.next.val:
                 temp = node.next
-                node.next = lSmall.next
-                lSmall.next = node
-                lSmall = node
+                node.next = l1.next
+                l1.next = node
+                l1 = node
                 node = temp
             else:
-                lSmall = lSmall.next
+                l1 = l1.next
 
             # print(f'node = {node}, l2 = {l2}')
 
