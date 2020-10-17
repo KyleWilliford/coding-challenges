@@ -1,49 +1,59 @@
+'''
+From https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/
+Best Time to Buy and Sell Stock II
+
+Say you have an array prices for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like
+(i.e., buy one and sell one share of the stock multiple times).
+
+Note: You may not engage in multiple transactions at the same time
+(i.e., you must sell the stock before you buy again).
+
+Author: Jiehan Zhu
+'''
+
 import numpy as np
 class Solution(object):
-    def maxProfit(prices):
+    def maxProfit_2(self, prices):
+        ''' Approach 2: Peak Valley Approach '''
+        m = len(prices)
+        if m == 1:
+            return 0
+        peak = prices[0]
+        valley = prices[0]
+        max_profit = 0
+        i = 0
+        while i < m-1:
+            while i < m-1 and prices[i] >= prices[i+1]:
+                i += 1
+            valley = prices[i]
+            while i < m-1 and prices[i] <= prices[i+1]:
+                i += 1
+            peak = prices[i]
+            max_profit += peak - valley
+            print(f'At time {i}, peak = {peak}, Valley = {valley}, incremental profit = {peak - valley}')
+        return max_profit
+
+
+    def maxProfit_3(self, prices):
+        ''' Approach 3: Simple One Pass '''
         # print("prices: ", prices)
         m = len(prices)
         if m == 1:
             return 0
-        profits = np.zeros((m, m), int)
-        for i in range(m-1):
-            for j in range(i+1, m):
-                if prices[j] > prices[i]:
-                    profits[i, j] = prices[j] - prices[i]
-        print("profits matrix\n", profits)
-
-        max_profits = []
-        for i in range(m-2, -1, -1):
-            print(f'i = {i}, max_profits = {max_profits}')
-            print('part of profits', profits[i, i+2:])
-            print('part of max_profit', max_profits)
-            if len(profits[i, i+2:]) >0:
-                profit_i = profits[i, i+2:] + np.array(max_profits)
-            else:
-                profit_i = []
-            print(f'profits[i, i + 1] = {profits[i, i + 1]}')
-            profit_i = list(profit_i) + [profits[i, i + 1]]
-            print(f'profit_i = {profit_i}')
-
-            max_profits.append(np.max(profit_i))
-            # print(profit_i)
-            # max_profits[i+1] = np.max(profit_i)
-            # max_profits = profits[i, i:].reverse()
-
-        # for i in range(m-1):
-        #     for j in range(i+1, m):
-        #         if prices[j] > prices[i]:
-        #             # print(f'i = {i}, j = {j}, m={m}')
-        #             # print(prices[i], prices[j], prices[j+1:m])
-        #             if j == m-1:
-        #                 profits[i, j] = prices[j] - prices[i]
-        #             else:
-        #                 profits[i, j] = prices[j] - prices[i] + maxProfit(prices[j+1:m])
-        # print("profits matrix\n", profits)
-        return np.max(max_profits)
+        max_profit = 0
+        for i in range(1, m):
+            if prices[i] > prices[i-1]:
+                max_profit += prices[i] - prices[i-1]
+                print(f'At time {i}, buy at {prices[i-1]}, sell at {prices[i]}, incremental profit = {prices[i] - prices[i-1]}')
+        return max_profit
 
 
 prices = [7, 1, 5, 3, 6, 4]
-print(Solution.maxProfit(prices))
+prices = [1, 7, 2, 3, 6, 7, 6, 7]
+print(prices)
+print(Solution.maxProfit_2(prices))
+print(Solution.maxProfit_3(prices))
 
 
