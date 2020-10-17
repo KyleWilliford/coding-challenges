@@ -13,13 +13,7 @@ Return true if there is a cycle in the linked list. Otherwise, return false.
 Follow up:
 Can you solve it using O(1) (i.e. constant) memory?
 """
-
-
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+from src.main.python.utility.linked_list import ListNode, initialLinkedList_Cycle
 
 
 class Solution:
@@ -71,33 +65,17 @@ class Solution:
 
 
 # Tests
-def initialLinkedList(val_list, pos):
-    head = ListNode(val_list[0])
-    nodeprior = head
-    for val in val_list[1:]:
-        node = ListNode(val)
-        nodeprior.next = node
-        nodeprior = node
 
-    if pos == -1:
-        return head
-
-    tail = node
-    node = head
-    for _ in range(pos-1):
-        node = node.next
-    tail.next = node
-    return head
 
 sol = Solution()
 valList1 = [3,2,0,-4]
 pos = 1
-linkedList1 = initialLinkedList(valList1, pos)
+linkedList1 = initialLinkedList_Cycle(valList1, pos)
 assert sol.hasCycle_hast(linkedList1)
 assert sol.hasCycle_2pointer(linkedList1)
 
 valList1 = [3,2,0,-4]
 pos = -1
-linkedList1 = initialLinkedList(valList1, pos)
+linkedList1 = initialLinkedList_Cycle(valList1, pos)
 assert not sol.hasCycle_hast(linkedList1)
 assert not sol.hasCycle_2pointer(linkedList1)

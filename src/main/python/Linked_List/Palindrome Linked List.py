@@ -6,13 +6,7 @@ Given a singly linked list, determine if it is a palindrome.
 Follow up:
 Could you do it in O(n) time and O(1) space?
 """
-
-
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+from src.main.python.utility.linked_list import ListNode, initialLinkedList
 
 
 class Solution:
@@ -66,15 +60,6 @@ class Solution:
 
 
 # Tests
-def initialLinkedList(val_list):
-    head = ListNode(val_list[0])
-    nodePrior = head
-    for val in val_list[1:]:
-        node = ListNode(val, None)
-        nodePrior.next = node
-        nodePrior = node
-    return head
-
 sol = Solution()
 valList1 = [1, 2, 2, 1]
 linkedList1 = initialLinkedList(valList1)

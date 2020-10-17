@@ -14,13 +14,7 @@ The number of the nodes in the given list is in the range [2, 1000].
 The value of each node in the list is unique.
 The node to be deleted is in the list and is not a tail node
 """
-# Definition for singly - linked list.
-
-
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+from src.main.python.utility.linked_list import ListNode
 
 class Solution:
     def deleteNode(self, node):
