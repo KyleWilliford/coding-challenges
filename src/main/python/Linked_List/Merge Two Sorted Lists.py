@@ -20,48 +20,36 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        head = l2
-        node = l1
-        while node:
-            if l2.val <= node.val <= l2.next.val:
-                temp = node.next
-                node.next = l2.next
-                l2.next = node
-                l2 = node
-                node = temp
-            else:
-                l2 = l2.next
-
-            print(f'node = {node}, l2 = {l2}')
-
-        print(f'head = {head}')
-        return head
-
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        print(f'l1 = {l1}, l2 = {l2}')
         if not l1:
             return l2
         if not l2:
             return l1
         if l1.val <= l2.val:
-            head = l1
+            lSmall = l1
+            lLarge = l2
         else:
-            head = l2
-        print(f'head = {head}')
-        tail = head
-        print(f'tail = ={tail}')
-        while l1 and l2:
-            if l1.val <= l2.val:
-                tail.next = l1
-                l1 = l1.next
-                print(f'l1 = {l1}, l2 = {l2}')
+            lSmall = l2
+            lLarge = l1
+        # print(f'lSmall, lLarge = {lSmall, lLarge}')
+        head = lSmall
+        node = lLarge
+        # print(f'head, node = {head, node}')
+        while node:
+            if not lSmall.next:
+                # print(f'lSmall, node = {lSmall, node}')
+                lSmall.next = node
+                break
+                # print(f'lSmall = {lSmall}')
+            elif lSmall.val <= node.val <= lSmall.next.val:
+                temp = node.next
+                node.next = lSmall.next
+                lSmall.next = node
+                lSmall = node
+                node = temp
             else:
-                tail.next = l2
-                l2 = l2.next
-            print(f'head, tail = {head, tail}, l1 = {l1}, l2 = {l2}')
-        if l1:
-            tail.next = l1
-        elif l2:
-            tail.next = l2
-        print(f'head, tail = {head, tail}, l1 = {l1}, l2 = {l2}')
+                lSmall = lSmall.next
+
+            # print(f'node = {node}, l2 = {l2}')
+
+        # print(f'head = {head}')
         return head
