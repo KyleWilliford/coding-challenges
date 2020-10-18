@@ -46,17 +46,19 @@ class Solution:
         """
         recursively
 
+        Runtime: 48 ms. Your runtime beats 16.23 % of python3 submissions.
+        Memory Usage: 14.3 MB
         :param root:
         :return:
         """
-        if root == None:
+        if not root:
             return True
         return self.check(root.left, root.right)
 
     def check(self, root1, root2):
-        if root1 == None and root2 == None:
+        if root1 is None and root2 is None:
             return True
-        if root1 == None or root2 == None:
+        if root1 is None or root2 is None:
             return False
         return root1.val == root2.val and self.check(root1.left, root2.right) and self.check(root1.right, root2.left)
 
