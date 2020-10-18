@@ -11,6 +11,7 @@ Follow up: Solve it both recursively and iteratively.
 """
 from src.main.python.utility.tree import TreeNode, initial_tree
 
+
 class Solution:
     def isSymmetric_iteractive(self, root: TreeNode) -> bool:
         """
