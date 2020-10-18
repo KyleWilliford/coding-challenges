@@ -6,6 +6,7 @@ Given an array where elements are sorted in ascending order, convert it to a hei
 For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 """
 from src.main.python.utility.tree import TreeNode, initial_tree
+from typing import List
 
 
 class Solution:
@@ -17,3 +18,6 @@ class Solution:
         node.left = self.sortedArrayToBST(nums[:ind])
         node.right = self.sortedArrayToBST(nums[ind+1:])
         return node
+
+sol = Solution()
+root = sol.sortedArrayToBST([-10, -3, 0, 5, 9])
