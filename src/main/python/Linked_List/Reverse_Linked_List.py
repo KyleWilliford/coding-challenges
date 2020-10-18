@@ -13,8 +13,10 @@ from src.main.python.utility.linked_list import ListNode, initialLinkedList
 
 
 class Solution:
-    def reverseList_interative(self, head: ListNode) -> ListNode:
+    def reverseList_iterative(self, head: ListNode) -> ListNode:
         """
+        iteratively
+
         Runtime: 32 ms. Your runtime beats 89.08 % of python3 submissions.
         Memory Usage: 15.3 MB
         :param head:
@@ -31,3 +33,12 @@ class Solution:
         return priorNode
 
     def reverseList_recursive(self, head: ListNode) -> ListNode:
+        """
+        recursively
+
+        :param head:
+        :return:
+        """
+        if not node:
+            return None
+        node = self.reverseList_recursive(node.next)
