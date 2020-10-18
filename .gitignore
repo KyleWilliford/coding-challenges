@@ -2,3 +2,4 @@
 target/
 *.iml
 .vscode/
+__pycache__
