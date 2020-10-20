@@ -17,7 +17,7 @@ Only the filled cells need to be validated according to the mentioned rules.
 class Solution:
     def isValidSudoku(self, board):
         """
-        Runtime: 92 ms. Your runtime beats 90.40 % of python3 submissions.
+        Runtime: 72 ms. Your runtime beats 99.98 % of python3 submissions.
         Memory Usage: 14.2 MB
         :type board: List[List[str]]
         :rtype: bool
