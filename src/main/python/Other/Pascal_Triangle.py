@@ -39,6 +39,40 @@ class Solution:
             result.append([1] + new_row + [1])
         return result
 
+    def generate_2(self, numRows: int) -> List[List[int]]:
+        """
+        math solution
+        Runtime: 28 ms. Your runtime beats 79.95 % of python3 submissions.
+        Memory Usage: 14 MB
+        :param numRows:
+        :return:
+        """
+        result = []
+        for i in range(numRows):
+            result.append([BinomialCoefficient(i, j) for j in range(i+1)])
+        return result
+
+
+def BinomialCoefficient(n: int, k: int) -> int:
+    """
+    n! / k!(n−k)!
+    :param n:
+    :param k:
+    :return:
+    """
+    if not 0 <= k <= n:
+        return 0
+    result = 1
+    for i in range(1, min(k, n - k) + 1):
+        result *= (n - i + 1)
+        result //= i
+    return result
+
 
 sol = Solution()
 assert sol.generate(5) == [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
+assert sol.generate_2(5) == [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
+
+
+assert BinomialCoefficient(6, 2) == 15
+assert BinomialCoefficient(7, 3) == 35
