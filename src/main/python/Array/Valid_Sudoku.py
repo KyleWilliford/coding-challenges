@@ -15,21 +15,58 @@ Only the filled cells need to be validated according to the mentioned rules.
 class Solution:
     def isValidSudoku(self, board):
         """
+        Runtime: 92 ms. Your runtime beats 90.40 % of python3 submissions.
+        Memory Usage: 14.2 MB
         :type board: List[List[str]]
         :rtype: bool
         """
         # init data
-        rows = [{} for i in range(9)]
-        columns = [{} for i in range(9)]
-        boxs = [{} for i in range(9)]
+        rows = [set() for i in range(9)]
+        columns = [set() for i in range(9)]
+        boxs = [set() for i in range(9)]
 
         # validate
         for i in range(9):
             for j in range(9):
-                num = [i][j]
+                num = board[i][j]
                 if num != '.':
                     num = int(num)
-                    box = (i // 3) * 3 + j // 3
+                    k = (i // 3) * 3 + j // 3
 
-                    # keep the current cell value
-                    rows[i][num] = rows[i].get(num, 0) + 1
+                    if num in rows[i]:
+                        return False
+                    rows[i].add(num)
+
+                    if num in columns[j]:
+                        return False
+                    columns[j].add(num)
+
+                    if num in boxs[k]:
+                        return False
+                    boxs[k].add(num)
+
+        return True
+
+sol = Solution()
+
+board = [["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+assert sol.isValidSudoku(board)
+
+board = [["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+assert not sol.isValidSudoku(board)
