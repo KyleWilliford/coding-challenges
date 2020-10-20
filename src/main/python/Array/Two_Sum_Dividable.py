@@ -38,8 +38,10 @@ def sum_divisible_2(a, k) -> int:
     for n in a:
         hash_cnt[n % k] += 1
 
-    sum_cnt = int(hash_cnt[0] * (hash_cnt[0] - 1) / 2)
-    for n in range(1, int(k / 2) + 1):
+    sum_cnt = hash_cnt[0] * (hash_cnt[0] - 1) // 2
+    if k % 2 == 1:
+        sum_cnt += hash_cnt[k // 2] * (hash_cnt[k // 2] - 1) // 2
+    for n in range(1, (k - 1) // 2):
         sum_cnt += hash_cnt[n] * hash_cnt[k - n]
 
     return sum_cnt
