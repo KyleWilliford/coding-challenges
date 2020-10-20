@@ -23,9 +23,9 @@ class Solution:
         :rtype: bool
         """
         # init data
-        rows = [set()] * 9
-        columns = [set()] * 9
-        boxs = [set()] * 9
+        rows = [set() for _ in range(9)]
+        columns = [set() for _ in range(9)]
+        boxs = [set() for _ in range(9)]
 
         # validate
         for i in range(9):
