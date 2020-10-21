@@ -24,7 +24,8 @@ class Solution:
 sol = Solution()
 s = "leetcode"
 wordDict = ["leet", "code"]
+assert sol.wordBreak(s, wordDict)
 
 s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"
 wordDict = ["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]
-sol.wordBreak(s, wordDict)
+assert sol.wordBreak(s, wordDict)
