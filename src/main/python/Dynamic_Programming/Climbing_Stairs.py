@@ -12,6 +12,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 class Solution:
     def climbStairs(self, n: int) -> int:
         """
+        dynamic programming
         Runtime: 32 ms
         Memory Usage: 14.1 MB
         :param n:
@@ -19,10 +20,10 @@ class Solution:
         """
         if n <= 2:
             return n
-        steps_1, steps_2 = 1, 2
+        fn_1, fn_2 = 1, 2
         for _ in range(3, n+1):
-            steps_1, steps_2 = steps_2, steps_1 + steps_2
-        return steps_2
+            fn_1, fn_2 = fn_2, fn_1 + fn_2
+        return fn_2
 
 
 sol = Solution()
