@@ -113,3 +113,13 @@ if __name__ == '__main__':
           longestCable(graph, n))
 
 # This code is contributed by PranchalK
+
+# test2
+n = 4
+graph = [[] for i in range(n + 1)] # add one to be able to make the index same as graph node
+graph[1].append([2, 1])
+graph[2].append([3, 1])
+graph[1].append([3, 1])
+graph[3].append([4, 1])
+print("Maximum length of cable =",
+      longestCable(graph, n))
